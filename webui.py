@@ -1058,15 +1058,93 @@ async def close_global_browser():
 
 def create_ui(config, theme_name="Ocean"):
     css = """
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600&display=swap');
+
     .gradio-container {
         max-width: 1200px !important;
         margin: auto !important;
         padding-top: 20px !important;
+        padding-bottom: 80px !important;
     }
+
     .header-text {
         text-align: center;
         margin-bottom: 30px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 30px;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        position: relative;
+        overflow: hidden;
     }
+
+    .header-text::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+        animation: shine 3s infinite;
+    }
+
+    @keyframes shine {
+        0% { transform: translateX(-100%); }
+        100% { transform: translateX(100%); }
+    }
+
+    .autonobot-title {
+        font-family: 'Orbitron', monospace !important;
+        font-size: 3.5rem !important;
+        font-weight: 900 !important;
+        background: linear-gradient(45deg, #00f5ff, #ff00ff, #00ff00, #ffff00);
+        background-size: 400% 400%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: gradientShift 4s ease-in-out infinite;
+        text-shadow: 0 0 30px rgba(0,245,255,0.5);
+        margin-bottom: 10px !important;
+        letter-spacing: 3px;
+    }
+
+    .autonobot-subtitle {
+        font-family: 'Exo 2', sans-serif !important;
+        font-size: 1.3rem !important;
+        font-weight: 300 !important;
+        color: #e0e0e0 !important;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-top: 10px !important;
+        text-shadow: 0 0 10px rgba(224,224,224,0.3);
+    }
+
+    @keyframes gradientShift {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    .footer-text {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+        color: #00f5ff;
+        text-align: center;
+        padding: 15px;
+        font-family: 'Exo 2', sans-serif;
+        font-size: 0.9rem;
+        font-weight: 400;
+        letter-spacing: 1px;
+        border-top: 2px solid rgba(0,245,255,0.3);
+        box-shadow: 0 -5px 20px rgba(0,0,0,0.5);
+        z-index: 1000;
+        text-shadow: 0 0 10px rgba(0,245,255,0.3);
+    }
+
     .theme-section {
         margin-bottom: 20px;
         padding: 15px;
@@ -1085,15 +1163,16 @@ def create_ui(config, theme_name="Ocean"):
     """
 
     with gr.Blocks(
-            title="Browser Use WebUI", theme=theme_map[theme_name], css=css, js=js
+            title="AUTONOBOT - Agente de Navegación Autónoma", theme=theme_map[theme_name], css=css, js=js
     ) as demo:
         with gr.Row():
-            gr.Markdown(
+            gr.HTML(
                 """
-                # 🌐 Browser Use WebUI
-                ### Control your browser with AI assistance
+                <div class="header-text">
+                    <h1 class="autonobot-title">🤖 AUTONOBOT</h1>
+                    <h3 class="autonobot-subtitle">Agente de Navegación Autónoma</h3>
+                </div>
                 """,
-                elem_classes=["header-text"],
             )
 
         with gr.Tabs() as tabs:
@@ -1612,6 +1691,15 @@ def create_ui(config, theme_name="Ocean"):
                          save_agent_history_path, save_trace_path, enable_recording,
                          max_steps, use_vision, max_actions_per_step, tool_calling_method]:
             component.change(fn=update_task_processor_config)
+
+        # Add footer
+        gr.HTML(
+            """
+            <div class="footer-text">
+                <strong>BOTIDINAMIX AI</strong> - Todos los derechos reservados 2025
+            </div>
+            """,
+        )
 
     return demo
 
