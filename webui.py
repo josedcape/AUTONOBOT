@@ -1065,17 +1065,45 @@ def create_ui(config, theme_name="Ocean"):
         margin: auto !important;
         padding-top: 20px !important;
         padding-bottom: 80px !important;
+        background: radial-gradient(circle at top, #1b1b1b, #000000 80%);
+        color: #e8e8e8;
+        overflow-x: hidden;
+    }
+
+    .gradio-container::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        background: repeating-linear-gradient(
+            135deg,
+            rgba(255, 0, 255, 0.15) 0px,
+            rgba(255, 0, 255, 0.15) 2px,
+            transparent 2px,
+            transparent 4px
+        );
+        animation: gridMove 20s linear infinite;
+        z-index: -1;
+    }
+
+    @keyframes gridMove {
+        from { transform: translate(0, 0); }
+        to { transform: translate(100px, 100px); }
     }
 
     .header-text {
         text-align: center;
         margin-bottom: 30px;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(135deg, #540d6e 0%, #ee0979 50%, #00e0ff 100%);
         padding: 30px;
         border-radius: 20px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        box-shadow: 0 0 20px rgba(238,9,121,0.6);
         position: relative;
         overflow: hidden;
+        color: #ffffff;
     }
 
     .header-text::before {
@@ -1085,8 +1113,8 @@ def create_ui(config, theme_name="Ocean"):
         left: 0;
         right: 0;
         bottom: 0;
-        background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
-        animation: shine 3s infinite;
+        background: linear-gradient(45deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 70%);
+        animation: shine 3s linear infinite;
     }
 
     @keyframes shine {
@@ -1113,11 +1141,11 @@ def create_ui(config, theme_name="Ocean"):
         font-family: 'Exo 2', sans-serif !important;
         font-size: 1.3rem !important;
         font-weight: 300 !important;
-        color: #e0e0e0 !important;
+        color: #f2f2f2 !important;
         text-transform: uppercase;
         letter-spacing: 2px;
         margin-top: 10px !important;
-        text-shadow: 0 0 10px rgba(224,224,224,0.3);
+        text-shadow: 0 0 10px rgba(255,255,255,0.3);
     }
 
     @keyframes gradientShift {
@@ -1713,6 +1741,9 @@ def main():
     args = parser.parse_args()
 
     config_dict = default_config()
+    # Ensure task processor uses the initial configuration so queued tasks
+    # have the same settings as the UI right from the start
+    task_processor.set_config(config_dict)
 
     demo = create_ui(config_dict, theme_name=args.theme)
     demo.launch(
