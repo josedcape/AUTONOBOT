@@ -1,6 +1,32 @@
+# AUTONOBOT 🚀
+
 <img src="./assets/web-ui.png" alt="Browser Use Web UI" width="full"/>
 
 <br/>
+
+## 🆕 **LATEST UPDATES - Task Queue Fix**
+
+### **✅ PROBLEMA RESUELTO: "Se queda cargando" en Task Queue**
+
+**🎯 Mejoras Implementadas:**
+
+- **🔧 Sincronización LLM**: Nuevo botón "🔧 Update Config" para sincronizar configuración
+- **🌐 Estabilidad del Navegador**: Verificación robusta y recreación automática
+- **🔄 Manejo de Errores**: Detección específica y reintentos automáticos
+- **📊 Diagnóstico Mejorado**: Logging detallado para resolución de problemas
+
+**🚀 Solución al Problema:**
+- **Antes**: Run Agent ✅ funcionaba, Task Queue ❌ fallaba con "Connection error"
+- **Causa**: Task Queue usaba configuración por defecto (OpenAI sin API key)
+- **Ahora**: Ambos usan la misma configuración LLM (ej: Gemini) ✅
+
+**🔧 Flujo Recomendado:**
+1. Configurar LLM en interfaz
+2. Clic "🔧 Update Config" para sincronizar
+3. Verificar mensaje de confirmación
+4. Usar Task Queue con confianza
+
+---
 
 [![GitHub stars](https://img.shields.io/github/stars/browser-use/web-ui?style=social)](https://github.com/browser-use/web-ui/stargazers)
 [![Discord](https://img.shields.io/discord/1303749220842340412?color=7289DA&label=Discord&logo=discord&logoColor=white)](https://link.browser-use.com/discord)
@@ -186,6 +212,8 @@ playwright install
    ```
 
 ## Changelog
+
+- [x] **2025/01/27:** **MAJOR FIX** - Resolved "Se queda cargando" issue in Task Queue. Added LLM configuration synchronization, browser stability improvements, enhanced error handling, and diagnostic logging. Task Queue now works seamlessly with all LLM providers (Gemini, OpenAI, etc.).
 - [x] **2025/01/26:** Thanks to @vvincent1234. Now browser-use-webui can combine with DeepSeek-r1 to engage in deep thinking!
 - [x] **2025/01/10:** Thanks to @casistack. Now we have Docker Setup option and also Support keep browser open between tasks.[Video tutorial demo](https://github.com/browser-use/web-ui/issues/1#issuecomment-2582511750).
 - [x] **2025/01/06:** Thanks to @richard-devbot. A New and Well-Designed WebUI is released. [Video tutorial demo](https://github.com/warmshao/browser-use-webui/issues/1#issuecomment-2573393113).
