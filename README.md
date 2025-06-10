@@ -1,219 +1,309 @@
-# AUTONOBOT 🚀
+<div align="center">
 
-<img src="./assets/web-ui.png" alt="Browser Use Web UI" width="full"/>
+# 🤖 AUTONOBOT
+### *Next-Generation Intelligent Browser Automation Platform*
 
-<br/>
+<img src="./assets/autonobot-hero.png" alt="AUTONOBOT - Intelligent Browser Automation" width="800"/>
 
-## 🆕 **LATEST UPDATES - Task Queue Fix**
+[![Python](https://img.shields.io/badge/Python-3.11+-blue.svg)](https://python.org)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Status](https://img.shields.io/badge/Status-Production%20Ready-brightgreen.svg)]()
+[![AI Powered](https://img.shields.io/badge/AI-Powered-purple.svg)]()
 
-### **✅ PROBLEMA RESUELTO: "Se queda cargando" en Task Queue**
+*Revolutionizing web automation through advanced AI-driven browser control with enterprise-grade reliability and seamless task orchestration.*
 
-**🎯 Mejoras Implementadas:**
-
-- **🔧 Sincronización LLM**: Nuevo botón "🔧 Update Config" para sincronizar configuración
-- **🌐 Estabilidad del Navegador**: Verificación robusta y recreación automática
-- **🔄 Manejo de Errores**: Detección específica y reintentos automáticos
-- **📊 Diagnóstico Mejorado**: Logging detallado para resolución de problemas
-
-**🚀 Solución al Problema:**
-- **Antes**: Run Agent ✅ funcionaba, Task Queue ❌ fallaba con "Connection error"
-- **Causa**: Task Queue usaba configuración por defecto (OpenAI sin API key)
-- **Ahora**: Ambos usan la misma configuración LLM (ej: Gemini) ✅
-
-**🔧 Flujo Recomendado:**
-1. Configurar LLM en interfaz
-2. Clic "🔧 Update Config" para sincronizar
-3. Verificar mensaje de confirmación
-4. Usar Task Queue con confianza
+</div>
 
 ---
 
-[![GitHub stars](https://img.shields.io/github/stars/browser-use/web-ui?style=social)](https://github.com/browser-use/web-ui/stargazers)
-[![Discord](https://img.shields.io/discord/1303749220842340412?color=7289DA&label=Discord&logo=discord&logoColor=white)](https://link.browser-use.com/discord)
-[![Documentation](https://img.shields.io/badge/Documentation-📕-blue)](https://docs.browser-use.com)
-[![WarmShao](https://img.shields.io/twitter/follow/warmshao?style=social)](https://x.com/warmshao)
+## 🚀 **What is AUTONOBOT?**
 
-This project builds upon the foundation of the [browser-use](https://github.com/browser-use/browser-use), which is designed to make websites accessible for AI agents.
+AUTONOBOT is a cutting-edge intelligent browser automation platform that combines the power of Large Language Models (LLMs) with robust browser control capabilities. Built for professionals, developers, and businesses who demand reliable, scalable, and intelligent web automation solutions.
 
-We would like to officially thank [WarmShao](https://github.com/warmshao) for his contribution to this project.
+### 🎯 **Core Value Proposition**
 
-**WebUI:** is built on Gradio and supports a most of `browser-use` functionalities. This UI is designed to be user-friendly and enables easy interaction with the browser agent.
+- **🧠 AI-First Approach**: Natural language task execution with advanced reasoning
+- **🔄 Enterprise Reliability**: Production-ready with comprehensive error handling
+- **⚡ Seamless Workflow**: Intuitive interface with powerful task management
+- **🌐 Universal Compatibility**: Works with any website, any browser, any task
+- **🛡️ Robust Architecture**: Built for stability, scalability, and continuous operation
 
-**Expanded LLM Support:** We've integrated support for various Large Language Models (LLMs), including: Gemini, OpenAI, Azure OpenAI, Anthropic, DeepSeek, Ollama etc. And we plan to add support for even more models in the future.
+---
 
-**Custom Browser Support:** You can use your own browser with our tool, eliminating the need to re-login to sites or deal with other authentication challenges. This feature also supports high-definition screen recording.
+## ✨ **Key Features & Capabilities**
 
-**Persistent Browser Sessions:** You can choose to keep the browser window open between AI tasks, allowing you to see the complete history and state of AI interactions.
+### 🎛️ **Advanced Task Queue System**
+- **Multi-Task Orchestration**: Execute complex workflows with intelligent task sequencing
+- **Real-Time Monitoring**: Live status tracking with detailed execution logs
+- **Priority Management**: Dynamic task reordering and execution control
+- **Persistent Sessions**: Maintain browser context across multiple operations
+- **Auto-Recovery**: Intelligent error detection and automatic retry mechanisms
 
-**Task Queue Management:** Advanced task queue system that allows you to:
-- Add multiple tasks to a queue without interrupting current execution
-- View and manage task status (pending, running, completed, failed)
-- Reorder tasks with priority system
-- Pause/resume queue execution
-- Maintain browser context across multiple tasks
+### 🔧 **LLM Configuration Synchronization**
+- **🔧 Update Config Button**: One-click synchronization across all system components
+- **Multi-Provider Support**: Seamless integration with Gemini, OpenAI, Anthropic, DeepSeek, Ollama
+- **Configuration Validation**: Real-time verification of API keys and model availability
+- **Unified Settings**: Centralized configuration management for consistent behavior
 
-<video src="https://github.com/user-attachments/assets/56bc7080-f2e3-4367-af22-6bf2245ff6cb" controls="controls">Your browser does not support playing this video!</video>
+### 🌐 **Enhanced Browser Management**
+- **Persistent Browser Sessions**: Maintain state and history across tasks
+- **Custom Browser Integration**: Use your existing browser with saved logins and preferences
+- **High-Definition Recording**: Capture and review all automation activities
+- **Multi-Resolution Support**: Adaptive display settings for optimal performance
+- **Connection Stability**: Robust error handling with automatic reconnection
 
-## Installation Options
+---
 
-### Option 1: Local Installation
+## 🛠️ **Installation & Setup**
 
-Read the [quickstart guide](https://docs.browser-use.com/quickstart#prepare-the-environment) or follow the steps below to get started.
+### 📋 **Prerequisites**
 
-> Python 3.11 or higher is required.
+- **Python 3.11+** (Required for local installation)
+- **Docker & Docker Compose** (For containerized deployment)
+- **Git** (For repository cloning)
 
-First, we recommend using [uv](https://docs.astral.sh/uv/) to setup the Python environment.
+### 🚀 **Quick Start - Automated Installation**
+
+AUTONOBOT includes an automated installation script for seamless setup:
 
 ```bash
+# Clone the repository
+git clone https://github.com/josedcape/AUTONOBOT.git
+cd AUTONOBOT
+
+# Run automated installation script
+./install.sh  # Linux/Mac
+# or
+install.bat   # Windows
+
+# Start AUTONOBOT
+python webui.py
+```
+
+### 🐳 **Docker Deployment (Recommended)**
+
+**Production-ready containerized deployment with full isolation:**
+
+```bash
+# Clone and setup
+git clone https://github.com/josedcape/AUTONOBOT.git
+cd AUTONOBOT
+
+# Configure environment
+cp .env.example .env
+# Edit .env with your API keys and preferences
+
+# Deploy with persistent browser sessions
+CHROME_PERSISTENT_SESSION=true docker compose up -d
+
+# Access the platform
+# WebUI: http://localhost:7788
+# VNC Viewer: http://localhost:6080/vnc.html
+```
+
+### 💻 **Local Development Setup**
+
+**For developers and advanced users:**
+
+```bash
+# Setup Python environment
 uv venv --python 3.11
-```
+source .venv/bin/activate  # Linux/Mac
+# .venv\Scripts\activate   # Windows
 
-and activate it with:
-
-```bash
-source .venv/bin/activate
-```
-
-Install the dependencies:
-
-```bash
+# Install dependencies
 uv pip install -r requirements.txt
+playwright install
+
+# Configure environment
+cp .env.example .env
+# Add your LLM API keys
+
+# Launch development server
+python webui.py --ip 127.0.0.1 --port 7788
 ```
 
-Then install playwright:
+---
+
+## 🎯 **Getting Started Guide**
+
+### 🔧 **Essential Configuration**
+
+1. **Configure Your LLM Provider:**
+   ```bash
+   # Edit your .env file
+   OPENAI_API_KEY=your_openai_key_here
+   GOOGLE_API_KEY=your_gemini_key_here
+   ANTHROPIC_API_KEY=your_claude_key_here
+   ```
+
+2. **Launch AUTONOBOT:**
+   ```bash
+   python webui.py --theme Ocean --dark-mode
+   ```
+
+3. **Access the Platform:**
+   - **Web Interface:** `http://localhost:7788`
+   - **VNC Viewer:** `http://localhost:6080/vnc.html` (Docker only)
+
+### 🚀 **Core Workflow**
+
+#### **Step 1: LLM Synchronization**
+1. Configure your preferred LLM in the interface
+2. Click the **🔧 Update Config** button to synchronize settings
+3. Verify the confirmation message appears
+4. Your Task Queue is now ready for seamless operation
+
+#### **Step 2: Task Execution**
+- **Single Task:** Use "Run Agent" for immediate execution
+- **Batch Processing:** Add multiple tasks to the Task Queue
+- **Monitoring:** Track progress in real-time with detailed logs
+
+#### **Step 3: Advanced Features**
+- **Browser Persistence:** Keep sessions active between tasks
+- **Custom Browser:** Integrate your existing browser profile
+- **Priority Management:** Reorder tasks based on urgency
+
+### 🎨 **Interface Customization**
+
+**Available Themes:**
+- `Ocean` (Default) - Calming blue interface
+- `Glass` - Modern semi-transparent design
+- `Citrus` - Vibrant and energetic
+- `Monochrome` - Minimalist grayscale
+- `Soft` - Gentle muted colors
+
+**Launch Options:**
+```bash
+python webui.py --ip 0.0.0.0 --port 8080 --theme Glass --dark-mode
+```
+
+### 🔧 **Browser Integration**
+
+**Windows Configuration:**
+```env
+CHROME_PATH="C:\Program Files\Google\Chrome\Application\chrome.exe"
+CHROME_USER_DATA="C:\Users\YourUsername\AppData\Local\Google\Chrome\User Data"
+CHROME_PERSISTENT_SESSION=true
+```
+
+**macOS Configuration:**
+```env
+CHROME_PATH="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+CHROME_USER_DATA="~/Library/Application Support/Google/Chrome/Profile 1"
+CHROME_PERSISTENT_SESSION=true
+```
+
+---
+
+## 🛠️ **Troubleshooting & Support**
+
+### 🔍 **Common Issues & Solutions**
+
+#### **"Connection Error" in Task Queue**
+**Problem:** Task Queue fails to execute with connection errors
+**Solution:**
+1. Configure your LLM provider in the interface
+2. Click **🔧 Update Config** to synchronize settings
+3. Verify confirmation message appears
+4. Restart the application if needed
+
+#### **Browser Not Opening**
+**Problem:** Browser fails to launch or connect
+**Solution:**
+1. Ensure Chrome/Chromium is installed
+2. Check `CHROME_PATH` in your `.env` file
+3. Verify browser permissions and close existing instances
+4. Try running with `--headless=false` for debugging
+
+#### **API Key Issues**
+**Problem:** LLM provider authentication failures
+**Solution:**
+1. Verify API keys are correctly set in `.env`
+2. Check API key permissions and quotas
+3. Test with different LLM providers
+4. Use **🔧 Update Config** after changes
+
+### 📊 **Performance Optimization**
+
+- **Memory Usage:** Enable `CHROME_PERSISTENT_SESSION=false` for lower memory consumption
+- **Speed:** Use local LLM providers (Ollama) for faster response times
+- **Stability:** Enable detailed logging with `DEBUG=true` for troubleshooting
+- **Scalability:** Deploy with Docker for production environments
+
+---
+
+## 🚀 **What's New in AUTONOBOT**
+
+### **🎯 Latest Features (v2.0)**
+
+- **✅ Task Queue Stability Fix:** Resolved loading issues with comprehensive error handling
+- **🔧 LLM Configuration Sync:** One-click synchronization across all components
+- **🌐 Enhanced Browser Management:** Robust connection handling and auto-recovery
+- **📊 Advanced Diagnostics:** Detailed logging and real-time status monitoring
+- **🎨 Modern Interface:** Redesigned UI with multiple themes and dark mode support
+
+### **🔮 Roadmap**
+
+- **Multi-Agent Orchestration:** Coordinate multiple AI agents simultaneously
+- **Visual Task Builder:** Drag-and-drop interface for complex workflows
+- **Enterprise SSO:** Single sign-on integration for business environments
+- **API Gateway:** RESTful API for programmatic access
+- **Cloud Deployment:** One-click cloud deployment options
+
+---
+
+## 🤝 **Contributing & Community**
+
+### **Get Involved**
+
+- **🐛 Report Issues:** [GitHub Issues](https://github.com/josedcape/AUTONOBOT/issues)
+- **💡 Feature Requests:** [Discussions](https://github.com/josedcape/AUTONOBOT/discussions)
+- **🔧 Contribute Code:** Fork, develop, and submit pull requests
+- **📖 Documentation:** Help improve our guides and tutorials
+
+### **Development Setup**
 
 ```bash
-playwright install
+# Fork and clone the repository
+git clone https://github.com/yourusername/AUTONOBOT.git
+cd AUTONOBOT
+
+# Create development environment
+python -m venv venv
+source venv/bin/activate  # Linux/Mac
+# venv\Scripts\activate   # Windows
+
+# Install development dependencies
+pip install -r requirements-dev.txt
+pre-commit install
+
+# Run tests
+pytest tests/
 ```
 
-### Option 2: Docker Installation
+---
 
-1. **Prerequisites:**
-   - Docker and Docker Compose installed on your system
-   - Git to clone the repository
+## 📄 **License & Acknowledgments**
 
-2. **Setup:**
-   ```bash
-   # Clone the repository
-   git clone https://github.com/browser-use/web-ui.git
-   cd web-ui
+**AUTONOBOT** is released under the [MIT License](LICENSE).
 
-   # Copy and configure environment variables
-   cp .env.example .env
-   # Edit .env with your preferred text editor and add your API keys
-   ```
+### **Special Thanks**
 
-3. **Run with Docker:**
-   ```bash
-   # Build and start the container with default settings (browser closes after AI tasks)
-   docker compose up --build
+- **Browser-Use Community** for the foundational framework
+- **Open Source Contributors** who make this project possible
+- **AI Research Community** for advancing the field of intelligent automation
 
-   # Or run with persistent browser (browser stays open between AI tasks)
-   CHROME_PERSISTENT_SESSION=true docker compose up --build
-   ```
+---
 
-4. **Access the Application:**
-   - WebUI: `http://localhost:7788`
-   - VNC Viewer (to see browser interactions): `http://localhost:6080/vnc.html`
-   
-   Default VNC password is "vncpassword". You can change it by setting the `VNC_PASSWORD` environment variable in your `.env` file.
+<div align="center">
 
+**🤖 AUTONOBOT - Intelligent Browser Automation Platform**
 
-## Usage
+*Built with ❤️ for the future of web automation*
 
-### Local Setup
-1.  Copy `.env.example` to `.env` and set your environment variables, including API keys for the LLM. `cp .env.example .env`
-2.  **Run the WebUI:**
-    ```bash
-    python webui.py --ip 127.0.0.1 --port 7788
-    ```
-4. WebUI options:
-   - `--ip`: The IP address to bind the WebUI to. Default is `127.0.0.1`.
-   - `--port`: The port to bind the WebUI to. Default is `7788`.
-   - `--theme`: The theme for the user interface. Default is `Ocean`.
-     - **Default**: The standard theme with a balanced design.
-     - **Soft**: A gentle, muted color scheme for a relaxed viewing experience.
-     - **Monochrome**: A grayscale theme with minimal color for simplicity and focus.
-     - **Glass**: A sleek, semi-transparent design for a modern appearance.
-     - **Origin**: A classic, retro-inspired theme for a nostalgic feel.
-     - **Citrus**: A vibrant, citrus-inspired palette with bright and fresh colors.
-     - **Ocean** (default): A blue, ocean-inspired theme providing a calming effect.
-   - `--dark-mode`: Enables dark mode for the user interface.
-3.  **Access the WebUI:** Open your web browser and navigate to `http://127.0.0.1:7788`.
-4.  **Using Your Own Browser(Optional):**
-    - Set `CHROME_PATH` to the executable path of your browser and `CHROME_USER_DATA` to the user data directory of your browser.
-      - Windows
-        ```env
-         CHROME_PATH="C:\Program Files\Google\Chrome\Application\chrome.exe"
-         CHROME_USER_DATA="C:\Users\YourUsername\AppData\Local\Google\Chrome\User Data"
-        ```
-        > Note: Replace `YourUsername` with your actual Windows username for Windows systems.
-      - Mac
-        ```env
-         CHROME_PATH="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
-         CHROME_USER_DATA="~/Library/Application Support/Google/Chrome/Profile 1"
-        ```
-    - Close all Chrome windows
-    - Open the WebUI in a non-Chrome browser, such as Firefox or Edge. This is important because the persistent browser context will use the Chrome data when running the agent.
-    - Check the "Use Own Browser" option within the Browser Settings.
-5. **Keep Browser Open(Optional):**
-    - Set `CHROME_PERSISTENT_SESSION=true` in the `.env` file.
+[![GitHub](https://img.shields.io/badge/GitHub-AUTONOBOT-blue?logo=github)](https://github.com/josedcape/AUTONOBOT)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Python](https://img.shields.io/badge/Python-3.11+-blue.svg)](https://python.org)
 
-### Docker Setup
-1. **Environment Variables:**
-   - All configuration is done through the `.env` file
-   - Available environment variables:
-     ```
-     # LLM API Keys
-     OPENAI_API_KEY=your_key_here
-     ANTHROPIC_API_KEY=your_key_here
-     GOOGLE_API_KEY=your_key_here
-
-     # Browser Settings
-     CHROME_PERSISTENT_SESSION=true   # Set to true to keep browser open between AI tasks
-     RESOLUTION=1920x1080x24         # Custom resolution format: WIDTHxHEIGHTxDEPTH
-     RESOLUTION_WIDTH=1920           # Custom width in pixels
-     RESOLUTION_HEIGHT=1080          # Custom height in pixels
-
-     # VNC Settings
-     VNC_PASSWORD=your_vnc_password  # Optional, defaults to "vncpassword"
-     ```
-
-2. **Browser Persistence Modes:**
-   - **Default Mode (CHROME_PERSISTENT_SESSION=false):**
-     - Browser opens and closes with each AI task
-     - Clean state for each interaction
-     - Lower resource usage
-
-   - **Persistent Mode (CHROME_PERSISTENT_SESSION=true):**
-     - Browser stays open between AI tasks
-     - Maintains history and state
-     - Allows viewing previous AI interactions
-     - Set in `.env` file or via environment variable when starting container
-
-3. **Viewing Browser Interactions:**
-   - Access the noVNC viewer at `http://localhost:6080/vnc.html`
-   - Enter the VNC password (default: "vncpassword" or what you set in VNC_PASSWORD)
-   - You can now see all browser interactions in real-time
-
-4. **Container Management:**
-   ```bash
-   # Start with persistent browser
-   CHROME_PERSISTENT_SESSION=true docker compose up -d
-
-   # Start with default mode (browser closes after tasks)
-   docker compose up -d
-
-   # View logs
-   docker compose logs -f
-
-   # Stop the container
-   docker compose down
-   ```
-
-## Changelog
-
-- [x] **2025/01/27:** **MAJOR FIX** - Resolved "Se queda cargando" issue in Task Queue. Added LLM configuration synchronization, browser stability improvements, enhanced error handling, and diagnostic logging. Task Queue now works seamlessly with all LLM providers (Gemini, OpenAI, etc.).
-- [x] **2025/01/26:** Thanks to @vvincent1234. Now browser-use-webui can combine with DeepSeek-r1 to engage in deep thinking!
-- [x] **2025/01/10:** Thanks to @casistack. Now we have Docker Setup option and also Support keep browser open between tasks.[Video tutorial demo](https://github.com/browser-use/web-ui/issues/1#issuecomment-2582511750).
-- [x] **2025/01/06:** Thanks to @richard-devbot. A New and Well-Designed WebUI is released. [Video tutorial demo](https://github.com/warmshao/browser-use-webui/issues/1#issuecomment-2573393113).
+</div>
