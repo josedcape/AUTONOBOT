@@ -97,7 +97,7 @@ Se han realizado mejoras significativas en la interfaz de usuario de AUTONOBOT p
 
 ### 1. **Iniciar AUTONOBOT**
 ```bash
-python webui.py --theme Ocean --auto-open
+python webui.py --auto-open
 ```
 
 ### 2. **Navegación**

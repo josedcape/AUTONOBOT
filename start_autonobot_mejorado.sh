@@ -25,7 +25,7 @@ else
     PYTHON_CMD="python"
 fi
 
-$PYTHON_CMD webui.py --theme Ocean --auto-open
+$PYTHON_CMD webui.py --auto-open
 
 echo
 echo "========================================"

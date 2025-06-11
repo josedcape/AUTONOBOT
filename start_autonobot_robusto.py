@@ -88,7 +88,7 @@ def start_autonobot():
         
         # Crear interfaz
         print("🎨 Creando interfaz futurista...")
-        demo = webui.create_ui(config, theme_name="Ocean")
+        demo = webui.create_ui(config, theme_name="Dark")
         print("✅ Interfaz creada exitosamente")
         
         # Lanzar servidor

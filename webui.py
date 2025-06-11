@@ -1800,6 +1800,37 @@ async def run_with_stream(
                 gr.update(interactive=True)    # Re-enable run button
             ]
 
+# Crear tema oscuro personalizado
+class DarkTheme(Base):
+    def __init__(self):
+        super().__init__(
+            primary_hue="slate",
+            secondary_hue="gray",
+            neutral_hue="slate",
+            text_size="md",
+            spacing_size="md",
+            radius_size="md",
+        )
+        # Forzar colores oscuros
+        self.set(
+            body_background_fill="*neutral_950",
+            body_background_fill_dark="*neutral_950",
+            background_fill_primary="*neutral_900",
+            background_fill_primary_dark="*neutral_900",
+            background_fill_secondary="*neutral_800",
+            background_fill_secondary_dark="*neutral_800",
+            block_background_fill="*neutral_900",
+            block_background_fill_dark="*neutral_900",
+            block_border_color="*neutral_700",
+            block_border_color_dark="*neutral_700",
+            input_background_fill="*neutral_800",
+            input_background_fill_dark="*neutral_800",
+            button_primary_background_fill="*primary_600",
+            button_primary_background_fill_dark="*primary_600",
+            button_primary_text_color="white",
+            button_primary_text_color_dark="white",
+        )
+
 # Define the theme map globally
 theme_map = {
     "Default": Default(),
@@ -1809,7 +1840,8 @@ theme_map = {
     "Origin": Origin(),
     "Citrus": Citrus(),
     "Ocean": Ocean(),
-    "Base": Base()
+    "Base": Base(),
+    "Dark": DarkTheme()
 }
 
 async def close_global_browser():
@@ -1823,7 +1855,7 @@ async def close_global_browser():
         await _global_browser.close()
         _global_browser = None
 
-def create_ui(config, theme_name="Ocean"):
+def create_ui(config, theme_name="Dark"):
     css = """
     @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600&display=swap');
 
@@ -1836,8 +1868,15 @@ def create_ui(config, theme_name="Ocean"):
         margin: auto !important;
         padding-top: 20px !important;
         padding-bottom: 80px !important;
-        background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%) !important;
+        background: linear-gradient(135deg, #000000 0%, #0a0a0a 25%, #1a1a1a 50%, #0f0f0f 100%) !important;
         min-height: 100vh;
+        color: #ffffff !important;
+    }
+
+    /* Forzar modo oscuro en todos los elementos */
+    body, .gradio-container, .gr-app {
+        background: #000000 !important;
+        color: #ffffff !important;
     }
 
     /* Mobile Responsive Breakpoints */
@@ -2395,6 +2434,15 @@ def create_ui(config, theme_name="Ocean"):
         }
     }
 
+    // Aplicar modo oscuro cuando la página esté lista
+    setTimeout(function() {
+        const url = new URL(window.location);
+        if (url.searchParams.get('__theme') !== 'dark') {
+            url.searchParams.set('__theme', 'dark');
+            window.location.href = url.href;
+        }
+    }, 100);
+
     // ============================================================================
     // MOBILE COMPATIBILITY JAVASCRIPT
     // ============================================================================
@@ -2405,6 +2453,11 @@ def create_ui(config, theme_name="Ocean"):
         createFloatingActionButtons();
         setupSwipeGestures();
         setupMobileCollapsibles();
+    });
+
+    // Observar cambios en la URL para mantener modo oscuro
+    window.addEventListener('popstate', function() {
+        refresh();
     });
 
     function initializeMobileFeatures() {
@@ -2740,7 +2793,7 @@ def create_ui(config, theme_name="Ocean"):
             with gr.TabItem("🔧 Configuración LLM", id=2):
                 with gr.Group():
                     llm_provider = gr.Dropdown(
-                        choices=[provider for provider,model in utils.model_names.items()],
+                        choices=list(utils.model_names.keys()),
                         label="Proveedor LLM",
                         value=config['llm_provider'],
                         info="Selecciona tu proveedor de modelo de lenguaje preferido"
@@ -3680,19 +3733,22 @@ def main():
     parser = argparse.ArgumentParser(description="Interfaz Gradio para Agente de Navegador")
     parser.add_argument("--ip", type=str, default="127.0.0.1", help="Dirección IP a la que enlazar")
     parser.add_argument("--port", type=int, default=7788, help="Puerto en el que escuchar")
-    parser.add_argument("--theme", type=str, default="Ocean", choices=theme_map.keys(), help="Tema a usar para la interfaz")
-    parser.add_argument("--dark-mode", action="store_true", help="Habilitar modo oscuro")
+    parser.add_argument("--theme", type=str, default="Dark", choices=theme_map.keys(), help="Tema a usar para la interfaz")
+    parser.add_argument("--dark-mode", action="store_true", default=True, help="Habilitar modo oscuro (activado por defecto)")
     parser.add_argument("--auto-open", action="store_true", help="Abrir navegador automáticamente")
     args = parser.parse_args()
 
     config_dict = default_config()
 
+    # Forzar modo oscuro siempre
+    args.dark_mode = True
+
     demo = create_ui(config_dict, theme_name=args.theme)
 
     # Configuración mejorada para evitar problemas de conexión
     try:
-        print(f"🚀 Iniciando AUTONOBOT en http://{args.ip}:{args.port}")
-        print("📱 Interfaz futurista con modelos Gemini actualizados")
+        print(f"🚀 Iniciando AUTONOBOT en http://{args.ip}:{args.port}?__theme=dark")
+        print("📱 Interfaz futurista con modo oscuro activado")
         print("🛑 Presiona Ctrl+C para detener el servidor")
 
         demo.launch(

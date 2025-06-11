@@ -129,13 +129,72 @@ def get_llm_model(provider: str, **kwargs):
     
 # Predefined model names for common providers
 model_names = {
-    "anthropic": ["claude-3-5-sonnet-20240620", "claude-3-opus-20240229"],
-    "openai": ["gpt-4o", "gpt-4", "gpt-3.5-turbo"],
-    "deepseek": ["deepseek-chat", "deepseek-reasoner"],
-    "gemini": ["gemini-2.5-pro-preview-05-06", "gemini-2.5-flash-preview-05-20", "gemini-2.0-flash", "gemini-2.0-flash-001", "gemini-2.0-flash-lite-001", "gemini-1.5-pro", "gemini-2.0-flash-preview-image-generation", "gemini-2.5-flash-preview-04-17", "gemini-1.5-flash-8b"],
-    "google": ["gemini-2.5-pro-preview-05-06", "gemini-2.5-flash-preview-05-20", "gemini-2.0-flash", "gemini-2.0-flash-001", "gemini-2.0-flash-lite-001", "gemini-1.5-pro", "gemini-2.0-flash-preview-image-generation", "gemini-2.5-flash-preview-04-17", "gemini-1.5-flash-8b"],
-    "ollama": ["qwen2.5:7b", "llama2:7b", "deepseek-r1:14b", "deepseek-r1:32b"],
-    "azure_openai": ["gpt-4o", "gpt-4", "gpt-3.5-turbo"]
+    "anthropic": [
+        "claude-3-5-sonnet-20241022",
+        "claude-3-5-sonnet-20240620",
+        "claude-3-5-haiku-20241022",
+        "claude-3-opus-20240229",
+        "claude-3-sonnet-20240229",
+        "claude-3-haiku-20240307"
+    ],
+    "openai": [
+        "gpt-4o",
+        "gpt-4o-mini",
+        "gpt-4-turbo",
+        "gpt-4",
+        "gpt-3.5-turbo",
+        "o1-preview",
+        "o1-mini"
+    ],
+    "deepseek": [
+        "deepseek-chat",
+        "deepseek-reasoner",
+        "deepseek-coder"
+    ],
+    "gemini": [
+        "gemini-2.5-pro-preview-05-06",
+        "gemini-2.5-flash-preview-05-20",
+        "gemini-2.0-flash",
+        "gemini-2.0-flash-001",
+        "gemini-2.0-flash-lite-001",
+        "gemini-1.5-pro",
+        "gemini-1.5-flash",
+        "gemini-1.5-flash-8b",
+        "gemini-2.0-flash-preview-image-generation",
+        "gemini-2.5-flash-preview-04-17"
+    ],
+    "google": [
+        "gemini-2.5-pro-preview-05-06",
+        "gemini-2.5-flash-preview-05-20",
+        "gemini-2.0-flash",
+        "gemini-2.0-flash-001",
+        "gemini-2.0-flash-lite-001",
+        "gemini-1.5-pro",
+        "gemini-1.5-flash",
+        "gemini-1.5-flash-8b",
+        "gemini-2.0-flash-preview-image-generation",
+        "gemini-2.5-flash-preview-04-17"
+    ],
+    "ollama": [
+        "qwen2.5:7b",
+        "qwen2.5:14b",
+        "qwen2.5:32b",
+        "llama3.2:3b",
+        "llama3.2:1b",
+        "llama2:7b",
+        "deepseek-r1:14b",
+        "deepseek-r1:32b",
+        "mistral:7b",
+        "codellama:7b",
+        "phi3:mini"
+    ],
+    "azure_openai": [
+        "gpt-4o",
+        "gpt-4o-mini",
+        "gpt-4-turbo",
+        "gpt-4",
+        "gpt-3.5-turbo"
+    ]
 }
 
 # Callback to update the model name dropdown based on the selected provider

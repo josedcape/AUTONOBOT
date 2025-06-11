@@ -139,7 +139,7 @@ python webui.py --ip 127.0.0.1 --port 7788
 
 2. **Launch AUTONOBOT:**
    ```bash
-   python webui.py --theme Ocean --dark-mode
+   python webui.py
    ```
 
 3. **Access the Platform:**
@@ -167,15 +167,16 @@ python webui.py --ip 127.0.0.1 --port 7788
 ### 🎨 **Interface Customization**
 
 **Available Themes:**
-- `Ocean` (Default) - Calming blue interface
+- `Dark` (Default) - Optimized dark interface
+- `Monochrome` - Minimalist grayscale
 - `Glass` - Modern semi-transparent design
 - `Citrus` - Vibrant and energetic
-- `Monochrome` - Minimalist grayscale
+- `Ocean` - Calming blue interface
 - `Soft` - Gentle muted colors
 
 **Launch Options:**
 ```bash
-python webui.py --ip 0.0.0.0 --port 8080 --theme Glass --dark-mode
+python webui.py --ip 0.0.0.0 --port 8080 --theme Dark
 ```
 
 ### 🔧 **Browser Integration**

@@ -93,7 +93,7 @@ def test_webui_creation():
         
         # Intentar crear la interfaz
         print("🔧 Creando interfaz...")
-        demo = webui.create_ui(config, theme_name="Ocean")
+        demo = webui.create_ui(config, theme_name="Dark")
         print("✅ Interfaz webui creada exitosamente")
         
         return True
