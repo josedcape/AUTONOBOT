@@ -17,13 +17,16 @@ def default_config():
         "llm_temperature": 1.0,
         "llm_base_url": "https://generativelanguage.googleapis.com/v1beta/models",
         "llm_api_key": "AIzaSyCxPRTsHIf-2NwAdyXqgjrOzYRgzXZFAcg",
-        "use_own_browser": os.getenv("CHROME_PERSISTENT_SESSION", "false").lower() == "true",
+        "use_own_browser": os.getenv("CHROME_PERSISTENT_SESSION", "false").lower()
+        == "true",
         "keep_browser_open": True,
         "headless": False,
         "disable_security": True,
         "enable_recording": True,
         "window_w": 1280,
         "window_h": 1100,
+        "chrome_debugging_host": os.getenv("CHROME_DEBUGGING_HOST", "localhost"),
+        "chrome_debugging_port": int(os.getenv("CHROME_DEBUGGING_PORT", "9222")),
         "save_recording_path": "./tmp/record_videos",
         "save_trace_path": "./tmp/traces",
         "save_agent_history_path": "./tmp/agent_history",
@@ -34,7 +37,7 @@ def default_config():
 def load_config_from_file(config_file):
     """Load settings from a UUID.pkl file."""
     try:
-        with open(config_file, 'rb') as f:
+        with open(config_file, "rb") as f:
             settings = pickle.load(f)
         return settings
     except Exception as e:
@@ -45,7 +48,7 @@ def save_config_to_file(settings, save_dir="./tmp/webui_settings"):
     """Save the current settings to a UUID.pkl file with a UUID name."""
     os.makedirs(save_dir, exist_ok=True)
     config_file = os.path.join(save_dir, f"{uuid.uuid4()}.pkl")
-    with open(config_file, 'wb') as f:
+    with open(config_file, "wb") as f:
         pickle.dump(settings, f)
     return f"Configuration saved to {config_file}"
 
@@ -88,10 +91,21 @@ def update_ui_from_config(config_file):
                 gr.update(value=loaded_config.get("use_vision", True)),
                 gr.update(value=loaded_config.get("tool_calling_method", True)),
                 gr.update(value=loaded_config.get("llm_provider", "gemini")),
-                gr.update(value=loaded_config.get("llm_model_name", "gemini-2.0-flash")),
+                gr.update(
+                    value=loaded_config.get("llm_model_name", "gemini-2.0-flash")
+                ),
                 gr.update(value=loaded_config.get("llm_temperature", 1.0)),
-                gr.update(value=loaded_config.get("llm_base_url", "https://generativelanguage.googleapis.com/v1beta/models")),
-                gr.update(value=loaded_config.get("llm_api_key", "AIzaSyCxPRTsHIf-2NwAdyXqgjrOzYRgzXZFAcg")),
+                gr.update(
+                    value=loaded_config.get(
+                        "llm_base_url",
+                        "https://generativelanguage.googleapis.com/v1beta/models",
+                    )
+                ),
+                gr.update(
+                    value=loaded_config.get(
+                        "llm_api_key", "AIzaSyCxPRTsHIf-2NwAdyXqgjrOzYRgzXZFAcg"
+                    )
+                ),
                 gr.update(value=loaded_config.get("use_own_browser", False)),
                 gr.update(value=loaded_config.get("keep_browser_open", False)),
                 gr.update(value=loaded_config.get("headless", False)),
@@ -99,24 +113,66 @@ def update_ui_from_config(config_file):
                 gr.update(value=loaded_config.get("enable_recording", True)),
                 gr.update(value=loaded_config.get("window_w", 1280)),
                 gr.update(value=loaded_config.get("window_h", 1100)),
-                gr.update(value=loaded_config.get("save_recording_path", "./tmp/record_videos")),
+                gr.update(
+                    value=loaded_config.get(
+                        "save_recording_path", "./tmp/record_videos"
+                    )
+                ),
                 gr.update(value=loaded_config.get("save_trace_path", "./tmp/traces")),
-                gr.update(value=loaded_config.get("save_agent_history_path", "./tmp/agent_history")),
+                gr.update(
+                    value=loaded_config.get(
+                        "save_agent_history_path", "./tmp/agent_history"
+                    )
+                ),
                 gr.update(value=loaded_config.get("task", "")),
-                "Configuration loaded successfully."
+                "Configuration loaded successfully.",
             )
         else:
             return (
-                gr.update(), gr.update(), gr.update(), gr.update(), gr.update(),
-                gr.update(), gr.update(), gr.update(), gr.update(), gr.update(),
-                gr.update(), gr.update(), gr.update(), gr.update(), gr.update(),
-                gr.update(), gr.update(), gr.update(), gr.update(), gr.update(),
-                gr.update(), "Error: Invalid configuration file."
+                gr.update(),
+                gr.update(),
+                gr.update(),
+                gr.update(),
+                gr.update(),
+                gr.update(),
+                gr.update(),
+                gr.update(),
+                gr.update(),
+                gr.update(),
+                gr.update(),
+                gr.update(),
+                gr.update(),
+                gr.update(),
+                gr.update(),
+                gr.update(),
+                gr.update(),
+                gr.update(),
+                gr.update(),
+                gr.update(),
+                gr.update(),
+                "Error: Invalid configuration file.",
             )
     return (
-        gr.update(), gr.update(), gr.update(), gr.update(), gr.update(),
-        gr.update(), gr.update(), gr.update(), gr.update(), gr.update(),
-        gr.update(), gr.update(), gr.update(), gr.update(), gr.update(),
-        gr.update(), gr.update(), gr.update(), gr.update(), gr.update(),
-        gr.update(), "No file selected."
+        gr.update(),
+        gr.update(),
+        gr.update(),
+        gr.update(),
+        gr.update(),
+        gr.update(),
+        gr.update(),
+        gr.update(),
+        gr.update(),
+        gr.update(),
+        gr.update(),
+        gr.update(),
+        gr.update(),
+        gr.update(),
+        gr.update(),
+        gr.update(),
+        gr.update(),
+        gr.update(),
+        gr.update(),
+        gr.update(),
+        gr.update(),
+        "No file selected.",
     )
