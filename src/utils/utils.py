@@ -78,13 +78,13 @@ def get_llm_model(provider: str, **kwargs):
                 base_url=base_url,
                 api_key=api_key,
             )
-    elif provider == "gemini":
+    elif provider == "gemini" or provider == "google":
         if not kwargs.get("api_key", ""):
             api_key = os.getenv("GOOGLE_API_KEY", "")
         else:
             api_key = kwargs.get("api_key")
         return ChatGoogleGenerativeAI(
-            model=kwargs.get("model_name", "gemini-2.0-flash-exp"),
+            model=kwargs.get("model_name", "gemini-1.5-flash"),
             temperature=kwargs.get("temperature", 0.0),
             google_api_key=api_key,
         )
@@ -132,7 +132,8 @@ model_names = {
     "anthropic": ["claude-3-5-sonnet-20240620", "claude-3-opus-20240229"],
     "openai": ["gpt-4o", "gpt-4", "gpt-3.5-turbo"],
     "deepseek": ["deepseek-chat", "deepseek-reasoner"],
-    "gemini": ["gemini-2.0-flash-exp", "gemini-2.0-flash-thinking-exp", "gemini-1.5-flash-latest", "gemini-1.5-flash-8b-latest", "gemini-2.0-flash-thinking-exp-1219" ],
+    "gemini": ["gemini-2.5-pro-preview-05-06", "gemini-2.5-flash-preview-05-20", "gemini-2.0-flash", "gemini-2.0-flash-001", "gemini-2.0-flash-lite-001", "gemini-1.5-pro", "gemini-2.0-flash-preview-image-generation", "gemini-2.5-flash-preview-04-17", "gemini-1.5-flash-8b"],
+    "google": ["gemini-2.5-pro-preview-05-06", "gemini-2.5-flash-preview-05-20", "gemini-2.0-flash", "gemini-2.0-flash-001", "gemini-2.0-flash-lite-001", "gemini-1.5-pro", "gemini-2.0-flash-preview-image-generation", "gemini-2.5-flash-preview-04-17", "gemini-1.5-flash-8b"],
     "ollama": ["qwen2.5:7b", "llama2:7b", "deepseek-r1:14b", "deepseek-r1:32b"],
     "azure_openai": ["gpt-4o", "gpt-4", "gpt-3.5-turbo"]
 }
