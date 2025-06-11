@@ -186,14 +186,20 @@ python webui.py --ip 0.0.0.0 --port 8080 --theme Dark
 CHROME_PATH="C:\Program Files\Google\Chrome\Application\chrome.exe"
 CHROME_USER_DATA="C:\Users\YourUsername\AppData\Local\Google\Chrome\User Data"
 CHROME_PERSISTENT_SESSION=true
+CHROME_DEBUGGING_HOST=localhost
+CHROME_DEBUGGING_PORT=9222
 ```
+Set `CHROME_DEBUGGING_HOST` to the address of your remote Chrome instance when connecting to a remote browser.
 
 **macOS Configuration:**
 ```env
 CHROME_PATH="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
 CHROME_USER_DATA="~/Library/Application Support/Google/Chrome/Profile 1"
 CHROME_PERSISTENT_SESSION=true
+CHROME_DEBUGGING_HOST=localhost
+CHROME_DEBUGGING_PORT=9222
 ```
+Set `CHROME_DEBUGGING_HOST` to the address of your remote Chrome instance when connecting to a remote browser.
 
 ---
 
