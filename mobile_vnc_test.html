@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Mobile VNC Test - Browser Automation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            color: white;
+        }
+        
+        .header {
+            background: rgba(0,0,0,0.2);
+            padding: 15px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+        
+        .header h1 {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+        
+        .header p {
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+        
+        .container {
+            flex: 1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .card {
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .status-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ff4444;
+            animation: pulse 2s infinite;
+        }
+        
+        .status-dot.connected {
+            background: #44ff44;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+        
+        .btn {
+            background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            margin: 5px;
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .btn:hover, .btn:active {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+        
+        .btn.primary {
+            background: rgba(76, 175, 80, 0.8);
+            border-color: rgba(76, 175, 80, 1);
+        }
+        
+        .btn.secondary {
+            background: rgba(33, 150, 243, 0.8);
+            border-color: rgba(33, 150, 243, 1);
+        }
+        
+        .info {
+            background: rgba(255,193,7,0.2);
+            border: 1px solid rgba(255,193,7,0.5);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 10px 0;
+        }
+        
+        .info h3 {
+            margin-bottom: 10px;
+            color: #ffc107;
+        }
+        
+        .log {
+            background: rgba(0,0,0,0.3);
+            border-radius: 10px;
+            padding: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            max-height: 200px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        
+        @media (max-width: 600px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+            
+            .header h1 {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🖥️ Mobile VNC Test</h1>
+        <p>Browser Automation Remote Viewing</p>
+    </div>
+    
+    <div class="container">
+        <div class="card">
+            <div class="status">
+                <div class="status-dot" id="statusDot"></div>
+                <span id="statusText">Checking connection...</span>
+            </div>
+            
+            <div class="info">
+                <h3>📱 Mobile VNC Access</h3>
+                <p>This page tests VNC connectivity for mobile devices. The VNC viewer allows you to watch browser automation from your phone or tablet.</p>
+            </div>
+            
+            <div class="grid">
+                <button class="btn primary" onclick="testWebUI()">🌐 Test WebUI</button>
+                <button class="btn secondary" onclick="testVNC()">🖥️ Test VNC</button>
+            </div>
+            
+            <div class="grid">
+                <a href="http://localhost:7860" class="btn" target="_blank">📱 Open WebUI</a>
+                <button class="btn" onclick="getNetworkInfo()">🔍 Network Info</button>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h3>📊 Connection Status</h3>
+            <div class="log" id="logOutput">Ready to test VNC functionality...\n</div>
+            <button class="btn" onclick="clearLog()">🗑️ Clear Log</button>
+        </div>
+        
+        <div class="card">
+            <h3>📋 Instructions</h3>
+            <ol style="padding-left: 20px; line-height: 1.6;">
+                <li>Ensure WebUI is running on your PC</li>
+                <li>Connect your mobile device to the same network</li>
+                <li>Access this page from your mobile browser</li>
+                <li>Test VNC connectivity</li>
+                <li>Use VNC viewer in the WebUI interface</li>
+            </ol>
+        </div>
+    </div>
+    
+    <script>
+        let logElement = document.getElementById('logOutput');
+        let statusDot = document.getElementById('statusDot');
+        let statusText = document.getElementById('statusText');
+        
+        function log(message) {
+            const timestamp = new Date().toLocaleTimeString();
+            logElement.textContent += `[${timestamp}] ${message}\n`;
+            logElement.scrollTop = logElement.scrollHeight;
+        }
+        
+        function updateStatus(connected, message) {
+            statusDot.className = `status-dot ${connected ? 'connected' : ''}`;
+            statusText.textContent = message;
+        }
+        
+        function clearLog() {
+            logElement.textContent = 'Log cleared...\n';
+        }
+        
+        async function testWebUI() {
+            log('🌐 Testing WebUI connection...');
+            updateStatus(false, 'Testing WebUI...');
+            
+            try {
+                const response = await fetch('http://localhost:7860', { 
+                    method: 'HEAD',
+                    mode: 'no-cors'
+                });
+                log('✅ WebUI connection successful');
+                updateStatus(true, 'WebUI connected');
+            } catch (error) {
+                log(`❌ WebUI connection failed: ${error.message}`);
+                updateStatus(false, 'WebUI connection failed');
+                
+                // Try alternative URLs
+                const hostname = window.location.hostname;
+                if (hostname !== 'localhost' && hostname !== '127.0.0.1') {
+                    log(`🔄 Trying alternative URL: http://${hostname}:7860`);
+                    try {
+                        const altResponse = await fetch(`http://${hostname}:7860`, { 
+                            method: 'HEAD',
+                            mode: 'no-cors'
+                        });
+                        log('✅ Alternative WebUI connection successful');
+                        updateStatus(true, 'WebUI connected (alternative)');
+                    } catch (altError) {
+                        log(`❌ Alternative WebUI connection failed: ${altError.message}`);
+                    }
+                }
+            }
+        }
+        
+        async function testVNC() {
+            log('🖥️ Testing VNC connection...');
+            updateStatus(false, 'Testing VNC...');
+            
+            // Test common VNC ports
+            const ports = [5999, 5900, 5901, 5902];
+            let connected = false;
+            
+            for (const port of ports) {
+                try {
+                    log(`🔍 Testing VNC port ${port}...`);
+                    
+                    // Try WebSocket connection
+                    const ws = new WebSocket(`ws://localhost:${port}`);
+                    
+                    await new Promise((resolve, reject) => {
+                        const timeout = setTimeout(() => {
+                            ws.close();
+                            reject(new Error('Connection timeout'));
+                        }, 3000);
+                        
+                        ws.onopen = () => {
+                            clearTimeout(timeout);
+                            log(`✅ VNC connection successful on port ${port}`);
+                            updateStatus(true, `VNC connected (port ${port})`);
+                            connected = true;
+                            ws.close();
+                            resolve();
+                        };
+                        
+                        ws.onerror = () => {
+                            clearTimeout(timeout);
+                            reject(new Error('Connection failed'));
+                        };
+                    });
+                    
+                    if (connected) break;
+                    
+                } catch (error) {
+                    log(`❌ VNC port ${port} failed: ${error.message}`);
+                }
+            }
+            
+            if (!connected) {
+                log('❌ No VNC server found on common ports');
+                updateStatus(false, 'VNC not available');
+                log('💡 Try starting a VNC task in the WebUI first');
+            }
+        }
+        
+        function getNetworkInfo() {
+            log('🔍 Getting network information...');
+            
+            const info = {
+                'User Agent': navigator.userAgent,
+                'Platform': navigator.platform,
+                'Language': navigator.language,
+                'Screen': `${screen.width}x${screen.height}`,
+                'Viewport': `${window.innerWidth}x${window.innerHeight}`,
+                'Location': window.location.href,
+                'Hostname': window.location.hostname,
+                'Protocol': window.location.protocol
+            };
+            
+            for (const [key, value] of Object.entries(info)) {
+                log(`📋 ${key}: ${value}`);
+            }
+            
+            // Detect mobile device
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            log(`📱 Mobile Device: ${isMobile ? 'Yes' : 'No'}`);
+            
+            // Network suggestions
+            if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                log('💡 For mobile access, use your PC\'s IP address instead of localhost');
+                log('💡 Example: http://192.168.1.100:7860');
+            }
+        }
+        
+        // Auto-test on load
+        window.addEventListener('load', () => {
+            log('🚀 Mobile VNC Test loaded');
+            setTimeout(testWebUI, 1000);
+        });
+        
+        // Handle orientation changes
+        window.addEventListener('orientationchange', () => {
+            setTimeout(() => {
+                log(`📱 Orientation changed: ${window.innerWidth}x${window.innerHeight}`);
+            }, 500);
+        });
+    </script>
+</body>
+</html>
